@@ -1,0 +1,164 @@
+/* ---------- Réglages généraux ---------- */
+:root {
+  --fond: #000000;
+  --ecran: #000000;
+  --texte: #ffffff;
+  --touche: #333336;
+  --touche-appui: #5a5a5f;
+  --fonction: #a5a5a9;
+  --fonction-appui: #d4d4d8;
+  --fonction-texte: #000000;
+  --operateur: #ff9f0a;
+  --operateur-appui: #ffc368;
+  --operateur-actif-fond: #ffffff;
+  --operateur-actif-texte: #ff9f0a;
+  --ecart: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+  background: var(--fond);
+  color: var(--texte);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overscroll-behavior: none;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  /* Évite que la page soit sous l'encoche ou la barre d'accueil de l'iPhone */
+  padding:
+    env(safe-area-inset-top, 0px)
+    env(safe-area-inset-right, 0px)
+    env(safe-area-inset-bottom, 0px)
+    env(safe-area-inset-left, 0px);
+}
+
+/* ---------- Calculatrice ---------- */
+.calculatrice {
+  width: 100%;
+  max-width: 480px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  gap: var(--ecart);
+}
+
+/* ---------- Écran ---------- */
+.ecran {
+  flex: 1 1 0;
+  min-height: 110px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 8px 4px;
+  background: var(--ecran);
+}
+
+#affichage {
+  flex: 1;
+  min-width: 0;
+  text-align: right;
+  font-size: 80px;
+  font-weight: 300;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.efface-dernier {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--operateur);
+  font-size: 26px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.efface-dernier:active { background: rgba(255, 159, 10, 0.25); }
+
+/* ---------- Touches ---------- */
+.touches {
+  flex: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: clamp(56px, 11dvh, 92px);
+  gap: var(--ecart);
+}
+
+.touches button {
+  border: none;
+  border-radius: 999px;
+  background: var(--touche);
+  color: var(--texte);
+  font-family: inherit;
+  font-size: clamp(24px, 4.2dvh, 34px);
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background 0.08s;
+}
+
+.touches button:active { background: var(--touche-appui); }
+
+.touches .fonction {
+  background: var(--fonction);
+  color: var(--fonction-texte);
+}
+.touches .fonction:active { background: var(--fonction-appui); }
+
+.touches .operateur,
+.touches .egal {
+  background: var(--operateur);
+  color: #ffffff;
+  font-size: clamp(28px, 5dvh, 40px);
+}
+.touches .operateur:active,
+.touches .egal:active { background: var(--operateur-appui); }
+
+/* Opérateur en attente : touche inversée */
+.touches .operateur.actif {
+  background: var(--operateur-actif-fond);
+  color: var(--operateur-actif-texte);
+}
+
+/* Le 0 prend deux colonnes, texte aligné à gauche comme sur iPhone */
+.touches .double {
+  grid-column: span 2;
+  text-align: left;
+  padding-left: clamp(24px, 9vw, 40px);
+}
+
+/* ---------- Grand écran (ordinateur) ---------- */
+@media (min-width: 600px) {
+  .calculatrice {
+    height: min(100%, 760px);
+    align-self: center;
+  }
+}
+
+/* ---------- Téléphone en mode paysage ---------- */
+@media (orientation: landscape) and (max-height: 500px) {
+  .calculatrice { padding: 6px; gap: 6px; }
+  .ecran { min-height: 50px; }
+  #affichage { font-size: 44px; }
+  .touches { gap: 6px; grid-auto-rows: clamp(34px, 12dvh, 56px); }
+  .touches button { font-size: 20px; }
+}

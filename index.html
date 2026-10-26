@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Calculatrice</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+
+  <!-- iPhone / iPad -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Calculatrice">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="calculatrice">
+
+    <section class="ecran">
+      <button class="efface-dernier" data-action="back" aria-label="Effacer le dernier chiffre">&#9003;</button>
+      <div id="affichage" aria-live="polite">0</div>
+    </section>
+
+    <section class="touches">
+      <button class="fonction" data-action="clear">C</button>
+      <button class="fonction" data-action="sign">&plusmn;</button>
+      <button class="fonction" data-action="percent">%</button>
+      <button class="operateur" data-op="/">&divide;</button>
+
+      <button data-digit="7">7</button>
+      <button data-digit="8">8</button>
+      <button data-digit="9">9</button>
+      <button class="operateur" data-op="*">&times;</button>
+
+      <button data-digit="4">4</button>
+      <button data-digit="5">5</button>
+      <button data-digit="6">6</button>
+      <button class="operateur" data-op="-">&minus;</button>
+
+      <button data-digit="1">1</button>
+      <button data-digit="2">2</button>
+      <button data-digit="3">3</button>
+      <button class="operateur" data-op="+">+</button>
+
+      <button class="double" data-digit="0">0</button>
+      <button data-action="decimal">,</button>
+      <button class="egal" data-action="equals">=</button>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
